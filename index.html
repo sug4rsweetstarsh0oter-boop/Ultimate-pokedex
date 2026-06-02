@@ -68,19 +68,17 @@ function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('collapsed');
 }
 
-// THE AUTOMATED CLOUD ADDRESS MAP
+// OPEN-SOURCE GITHUB CLOUD ASSET LINK ENGINE
 const getPokeImage = (id, variant, isShiny) => {
-  // If it's a shiny global flip
   if (isShiny) {
-    if (variant === "galar") return "https://unpkg.com";
-    return `https://unpkg.com{id}.png`;
+    if (variant === "galar") return "https://githubusercontent.com";
+    return `https://githubusercontent.com{id}.png`;
   }
-  // Standard non-shiny forms
-  if (variant === "galar") return "https://unpkg.com";
-  return `https://unpkg.com{id}.png`;
+  if (variant === "galar") return "https://githubusercontent.com";
+  return `https://githubusercontent.com{id}.png`;
 };
 
-let currentPokemonId = 77; // Ponyta
+let currentPokemonId = 77; 
 let currentForm = "kanto";
 let isShiny = false;
 
@@ -96,7 +94,6 @@ function updateCardLayout() {
   } else if (currentForm === "galar") {
     pokeTitle.innerText = isShiny ? "✨ Shiny Galar" : "Galar Ponyta";
   }
-  // THE MAGIC LINE: Automatically builds the image link instantly!
   pokeSprite.src = getPokeImage(currentPokemonId, currentForm, isShiny);
 }
 
@@ -126,6 +123,7 @@ globalShinyBtn.addEventListener('click', () => {
   updateCardLayout();
 });
 </script>
+
 
 </body>
 </html> 
