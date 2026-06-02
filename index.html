@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Absolute Ultimate Pokédex</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background-color: #121824; color: #ffffff; }
+    .top-nav { height: 60px; background-color: #1a2333; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; border-bottom: 2px solid #2a374e; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    .logo { font-weight: bold; font-size: 1rem; color: #ff4757; }
+    .search-bar { background-color: #0f141c; border: 1px solid #2a374e; color: white; padding: 6px 12px; border-radius: 20px; width: 40%; }
+    .shiny-toggle { background: linear-gradient(135deg, #ffd32a, #ff9f43); border: none; color: #121824; padding: 6px 10px; font-weight: bold; border-radius: 20px; font-size: 0.8rem; cursor: pointer; }
+    .app-container { display: flex; margin-top: 60px; height: calc(100vh - 60px); }
+    .sidebar { width: 100px; background-color: #161f2e; border-right: 2px solid #2a374e; display: flex; flex-direction: column; transition: width 0.2s ease; }
+    .sidebar.collapsed { width: 45px; }
+    .menu-toggle-btn { background: none; border: none; color: #a4b0be; padding: 10px; font-size: 0.8rem; text-align: left; cursor: pointer; }
+    .nav-item { color: #a4b0be; text-decoration: none; padding: 12px 10px; font-size: 0.8rem; }
+    .nav-item.active { background-color: #202b3e; color: #00d2d3; border-left: 3px solid #00d2d3; }
+    .main-content { flex-grow: 1; padding: 15px; background-color: #0f141c; overflow-y: auto; }
+    .sample-card { background-color: #1a2333; border: 2px solid #2a374e; border-radius: 15px; width: 170px; padding: 15px; text-align: center; margin-top: 15px; }
+    .card-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: #a4b0be; margin-bottom: 10px; }
+    .sample-card h3 { margin: 0; font-size: 0.95rem; }
+    .sprite-box { background-color: #161f2e; border: 1px solid #2a374e; border-radius: 10px; padding: 10px; margin: 10px 0; display: flex; justify-content: center; align-items: center; height: 120px; }
+    .sprite-box img { max-width: 110px; max-height: 110px; object-fit: contain; }
+    .form-buttons { display: flex; justify-content: space-around; margin-top: 12px; }
+    .form-btn { background-color: #0f141c; border: 1px solid #2a374e; color: white; padding: 4px 8px; border-radius: 5px; font-size: 0.75rem; cursor: pointer; }
+    .form-btn.active { background-color: #ff4757; border-color: #ff4757; }
+  </style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="logo">🧬 ULTIMATE POKÉDEX</div>
+  <input type="text" class="search-bar" placeholder="Search...">
+  <button class="shiny-toggle" id="globalShinyBtn">✨ SHINY OFF</button>
+</div>
+
+<div class="app-container">
+  <div class="sidebar" id="sidebar">
+    <button class="menu-toggle-btn" onclick="toggleSidebar()">☰ Toggle</button>
+    <a href="#" class="nav-item active">📕 Handbook</a>
+    <a href="#" class="nav-item">🎒 Items</a>
+    <a href="#" class="nav-item">💿 TMs</a>
+    <a href="#" class="nav-item">🗺️ Maps</a>
+  </div>
+  
+  <div class="main-content">
+    <h1 style="margin-top:0;">Pokémon Handbook</h1>
+    
+    <div class="sample-card">
+      <div class="card-header">
+        <span class="dex-num">#0077</span>
+        <h3 id="poke-title">Kanto Ponyta</h3>
+      </div>
+      <div class="sprite-box">
+        <img id="poke-sprite" src="https://githubusercontent.com" alt="Ponyta">
+      </div>
+      <div class="form-buttons">
+        <button class="form-btn active" id="kantoBtn">Kanto</button>
+        <button class="form-btn" id="galarBtn">Galar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+}
+
+const officialImages = {
+  kanto: "https://githubusercontent.com",
+  kantoShiny: "https://githubusercontent.com",
+  galar: "https://githubusercontent.com",
+  galarShiny: "https://githubusercontent.com"
+};
+
+let currentForm = "kanto";
+let isShiny = false;
+
+const pokeSprite = document.getElementById('poke-sprite');
+const pokeTitle = document.getElementById('poke-title');
+const globalShinyBtn = document.getElementById('globalShinyBtn');
+const kantoBtn = document.getElementById('kantoBtn');
+const galarBtn = document.getElementById('galarBtn');
+
+function updateCardLayout() {
+  if (currentForm === "kanto") {
+    pokeTitle.innerText = isShiny ? "✨ Shiny Kanto" : "Kanto Ponyta";
+    pokeSprite.src = isShiny ? officialImages.kantoShiny : officialImages.kanto;
+  } else if (currentForm === "galar") {
+    pokeTitle.innerText = isShiny ? "✨ Shiny Galar" : "Galar Ponyta";
+    pokeSprite.src = isShiny ? officialImages.galarShiny : officialImages.galar;
+  }
+}
+
+kantoBtn.addEventListener('click', () => {
+  currentForm = "kanto";
+  kantoBtn.classList.add('active');
+  galarBtn.classList.remove('active');
+  updateCardLayout();
+});
+
+galarBtn.addEventListener('click', () => {
+  currentForm = "galar";
+  galarBtn.classList.add('active');
+  kantoBtn.classList.remove('active');
+  updateCardLayout();
+});
+
+globalShinyBtn.addEventListener('click', () => {
+  isShiny = !isShiny;
+  if (isShiny) {
+    globalShinyBtn.innerText = "✨ SHINY ON";
+    globalShinyBtn.style.background = "linear-gradient(135deg, #00d2d3, #54a0ff)";
+  } else {
+    globalShinyBtn.innerText = "✨ SHINY OFF";
+    globalShinyBtn.style.background = "linear-gradient(135deg, #ffd32a, #ff9f43)";
+  }
+  updateCardLayout();
+});
+</script>
+</body>
+</html>
 
