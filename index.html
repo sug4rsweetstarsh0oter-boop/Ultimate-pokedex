@@ -67,17 +67,20 @@
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('collapsed');
 }
-// PURE OFFICIAL MEDIA SERVER ENGINE
+// THE UNRESTRICTED ANIMATED GIF ENGINE
 const getPokeImage = (id, variant, isShiny) => {
-  // Turn 77 into "077" so the official server can read it
-  let paddedId = String(id).padStart(3, '0');
-  
+  // Turn 77 into "77" or use form logic for Alola/Galar
   if (variant === "galar") {
-    // Official path for Galarian Ponyta
-    return "https://pokemon.com";
+    if (isShiny) return "https://projectpokemon.org";
+    return "https://projectpokemon.org";
   }
-  // Official path for Kanto Ponyta
-  return `https://pokemon.com{paddedId}.png`;
+  
+  if (isShiny) {
+    // Whitelisted animated shiny sprites network path
+    return `https://githubusercontent.com{id}.gif`;
+  }
+  // Whitelisted animated normal sprites network path
+  return `https://githubusercontent.com{id}.gif`;
 };
 
 let currentPokemonId = 77; 
@@ -125,3 +128,4 @@ globalShinyBtn.addEventListener('click', () => {
   updateCardLayout();
 });
 </script>
+
