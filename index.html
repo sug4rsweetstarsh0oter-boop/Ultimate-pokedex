@@ -67,19 +67,20 @@
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('collapsed');
 }
-// THE AUTOMATED DESKTOP IMAGE ENGINE
+// PURE OFFICIAL MEDIA SERVER ENGINE
 const getPokeImage = (id, variant, isShiny) => {
-  // If it's a shiny global flip
-  if (isShiny) {
-    if (variant === "galar") return "https://githubusercontent.com";
-    return `https://githubusercontent.com{id}.png`;
+  // Turn 77 into "077" so the official server can read it
+  let paddedId = String(id).padStart(3, '0');
+  
+  if (variant === "galar") {
+    // Official path for Galarian Ponyta
+    return "https://pokemon.com";
   }
-  // Standard non-shiny forms
-  if (variant === "galar") return "https://githubusercontent.com";
-  return `https://githubusercontent.com{id}.png`;
+  // Official path for Kanto Ponyta
+  return `https://pokemon.com{paddedId}.png`;
 };
 
-let currentPokemonId = 77; // Ponyta
+let currentPokemonId = 77; 
 let currentForm = "kanto";
 let isShiny = false;
 
@@ -95,7 +96,6 @@ function updateCardLayout() {
   } else if (currentForm === "galar") {
     pokeTitle.innerText = isShiny ? "✨ Shiny Galar" : "Galar Ponyta";
   }
-  // The automated image generator link!
   pokeSprite.src = getPokeImage(currentPokemonId, currentForm, isShiny);
 }
 
