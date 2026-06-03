@@ -53,7 +53,7 @@
         <h3 id="poke-title">Kanto Ponyta</h3>
       </div>
       <div class="sprite-box"> 
-<img id="poke-sprite" src="https://githubusercontent.com" alt="Ponyta">
+<img id="poke-sprite" src="https://giphy.com" alt="Ponyta" style="width: 80px; height: 80px;">
       </div>
       <div class="form-buttons">
         <button class="form-btn active" id="kantoBtn">Kanto</button>
@@ -69,13 +69,14 @@ function toggleSidebar() {
 }
 // THE UNRESTRICTED ANIMATED GIF ENGINE
 const getPokeImage = (id, variant, isShiny) => {
-  // Turn 77 into "77" or use form logic for Alola/Galar
   if (variant === "galar") {
-    if (isShiny) return "https://projectpokemon.org";
-    return "https://projectpokemon.org";
+    if (isShiny) return "https://giphy.com"; // Rare blue sparkle ball
+    return "https://giphy.com";
   }
-  
-  if (isShiny) {
+  if (isShiny) return "https://giphy.com"; // Golden ultra ball
+  return "https://giphy.com"; // Classic PokeBall
+};
+if (isShiny) {
     // Whitelisted animated shiny sprites network path
     return `https://githubusercontent.com{id}.gif`;
   }
