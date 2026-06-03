@@ -67,18 +67,19 @@
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('collapsed');
 }
-
-// OPEN-SOURCE GITHUB CLOUD ASSET LINK ENGINE
+// THE AUTOMATED DESKTOP IMAGE ENGINE
 const getPokeImage = (id, variant, isShiny) => {
+  // If it's a shiny global flip
   if (isShiny) {
     if (variant === "galar") return "https://githubusercontent.com";
     return `https://githubusercontent.com{id}.png`;
   }
+  // Standard non-shiny forms
   if (variant === "galar") return "https://githubusercontent.com";
   return `https://githubusercontent.com{id}.png`;
 };
 
-let currentPokemonId = 77; 
+let currentPokemonId = 77; // Ponyta
 let currentForm = "kanto";
 let isShiny = false;
 
@@ -94,6 +95,7 @@ function updateCardLayout() {
   } else if (currentForm === "galar") {
     pokeTitle.innerText = isShiny ? "✨ Shiny Galar" : "Galar Ponyta";
   }
+  // The automated image generator link!
   pokeSprite.src = getPokeImage(currentPokemonId, currentForm, isShiny);
 }
 
@@ -123,8 +125,3 @@ globalShinyBtn.addEventListener('click', () => {
   updateCardLayout();
 });
 </script>
-
-
-</body>
-</html> 
-
